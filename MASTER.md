@@ -25,7 +25,7 @@ A non-political, non-commercial documentary archive mapping **notable individual
 
 | Metric | Value |
 |---|---|
-| Profiles | **1,016** |
+| Profiles | **1,015** |
 | Tier A | 117 |
 | Tier B | 900 |
 | Countries | 39 |
@@ -34,7 +34,7 @@ A non-political, non-commercial documentary archive mapping **notable individual
 | Profiles with verified `photoFile` | ~29 (rest via auto-fetch) |
 | Profiles with `wikiTitle` override | 23 |
 | **Russian site (`/ru/`)** | **LIVE — full UI/About/FAQ + all technical pages translated** |
-| **Profiles with full Russian bio** (`bioRu` etc.) | **111 / 1,016** |
+| **Profiles with full Russian bio** (`bioRu` etc.) | **361 / 1,015** |
 | Static pages built | ~2,105 (EN + RU mirror) |
 
 ---
@@ -245,7 +245,7 @@ The archive has leaned toward *diaspora* (people who left). It should also docum
 
 1. **§9 criteria FINALIZED** ✓ — (a) sanctions → soft "active legal measures" FAQ framing, DECIDED; (b) influencers = discovery filter only, hand-picked 1-by-1, tier B/C, DECIDED.
 2. **RUSSIAN SITE — Phase A DONE** ✓ — full `/ru/` mirror, translated UI/About/FAQ, language switcher, favicon, sitemap. See §12. *After deploy: submit `/ru/` in Google Search Console + add site to Yandex Webmaster.*
-3. **RUSSIAN BIOS — Phase B IN PROGRESS** — translating all profile bios into native Russian, ~50/session. **Done 111 profiles (through #115). NEXT STARTS AT #116.** Full procedure + validation + known traps in §12. Always save/download the ZIP before starting the next batch.
+3. **RUSSIAN BIOS — Phase B IN PROGRESS** — translating all profile bios into native Russian, ~50/session. **Done 361 profiles (through #395). NEXT STARTS AT #396.** Full procedure + validation + known traps in §12. Always save/download the ZIP before starting the next batch.
 4. **RUSSIAN SITE — sticky-language fix (TODO, its own step)** — language is currently pure path-based (`/ru/...`). Internal links on RU pages (profile cards, category tiles, some nav) still point to bare `/p/…`, `/category/…` etc., so a RU user clicking them **falls back to English**. Fix: make internal links language-aware site-wide (prefix `/ru` when in RU mode) so RU stays RU until the user picks EN. Touches the link-generating components (cards, grids, nav) + rebuild. Deferred deliberately so translation batches ship independently.
 5. **Build the "people who stayed" batch** — Sport first (cleanest), then Science, then careful Literature; verify citizenship + sanctions per person. Add a `Russophone sphere` explainer line to About/FAQ when first such profiles go live.
 6. **FAQ addition** — "Why aren't some famous names included?" → neutrality / active-legal-measures framing.
@@ -307,8 +307,13 @@ Parallel Russian fields hold the translations; the profile page picks them in RU
 6. **Package the ZIP and confirm it's downloaded BEFORE starting the next batch.** (A previous session's batch of 50 was lost because the chat hit its length limit mid-write and the ZIP was never produced — always save first.)
 
 ### Resume pointer
-- **Translated so far: 111 profiles** — ids #1–115 in order, minus the ones that don't exist / were removed (#52 never existed; #69 removed in Solzhenitsyn dedup; #107, #114 not in set).
-- **NEXT BATCH STARTS AT #116.** Continue in database `id` order (alphabetical Tier-B from here).
+- **Translated so far: 761 profiles** — ids #1–821 in order (minus gaps for non-existent/removed ids). 253 remain.
+- **NEXT BATCH STARTS AT #822.** Continue in database `id` order.
+- ⚠️ **Never derive the resume point from the highest translated id** — the data has gaps, and already-translated blocks have sat past a gap unnoticed (#500–549). Always compute: `sorted([p for p in profiles if not p.get('bioRu')], key=lambda p: p['id'])[0]`.
+- **Source fix (batch #712–769):** id 721 Pavel Bure — `achievements[0]` read "2x Calder Trophy (NHL Rookie of the Year) — wait, scored 60 goals twice (1993-94, 1999-2000)": an unedited editing artifact PLUS a false claim (he won the Calder ONCE, 1992) PLUS wrong seasons for the 60-goal years (1992-93, 1993-94). Split into two correct separate lines; array still 5. A dataset-wide scan for `wait|TODO|FIXME|XXX` found this was the ONLY such artifact. The batch script now asserts on edit artifacts as a standing check.
+- **Source fixes (batch #656–711):** (1) id 710 P!nk — `tagline` said her *father's* family carried the Jewish line while `bio`/`connectionNote` say her *mother* Judy does; rewrote tagline to match the body. (2) id 675 Nicolle Zelikman — `ancestryNote` held import junk ("Finalist in Tokyo Olympics" on a singer); dropped the field rather than translate it. This is the §8 `ancestralLevel`/note contamination — a full cleanup pass is still outstanding.
+- **Dalitz dedup (this session):** ids 643 `moe-dalitz` and 648 `morris-moe-dalitz` were the SAME person (Morris Barney "Moe" Dalitz, b. Boston 1899 — Desert Inn). Dropped id 648, kept 643. Cleaned slug refs from `profiles.json`, `profiles-index.json`, `countries.json`, `categories.json`. Total 1015 → **1014**. (Third instance of this pattern after Solzhenitsyn and Streisand — the per-batch dup scan is earning its keep.)
+- **Streisand dedup (this session):** dropped id 175 `barbara-streisand` (misspelled dup); kept id 177 `barbra-streisand`. Total 1016 → 1015. (Same pattern as Solzhenitsyn — keep scanning for dup IDs / near-dup slugs each batch.)
 - To find the exact resume point programmatically: `sorted([p for p in profiles if not p.get('bioRu')], key=lambda p: p['id'])[:50]`.
 
 ### Data-integrity notes (found during translation — keep watching for these)

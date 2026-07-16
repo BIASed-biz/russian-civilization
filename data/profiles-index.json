@@ -4076,29 +4076,6 @@
       "source1": "https://en.wikipedia.org/wiki/Bar_Refaeli"
     },
     {
-      "id": 175,
-      "slug": "barbara-streisand",
-      "tier": "B",
-      "status": "Data imported",
-      "name": "Barbara Streisand",
-      "nameRu": "Барбра Стрейзанд",
-      "tagline": "Brooklyn-born icon with Russian-Galician roots who became the greatest living entertainer",
-      "profession": "Singer",
-      "category": "Music & Performing Arts",
-      "categoryIcon": "music",
-      "country": "USA",
-      "countryFlag": "🇺🇸",
-      "regionTag": "North America",
-      "ancestralLevel": "Grandparents",
-      "origin": "USA",
-      "historicalEntity": "",
-      "russianProficiency": "Unknown",
-      "tags": [
-        "Russian diaspora"
-      ],
-      "source1": "https://en.wikipedia.org/wiki/Barbra_Streisand"
-    },
-    {
       "id": 176,
       "slug": "barbara-walters",
       "tier": "B",
@@ -15017,30 +14994,6 @@
       ],
       "source1": "https://en.wikipedia.org/wiki/Morgenshtern_(rapper)",
       "wikiTitle": "Morgenshtern"
-    },
-    {
-      "id": 648,
-      "slug": "morris-moe-dalitz",
-      "tier": "B",
-      "status": "Data imported",
-      "name": "Morris \"Moe\" Dalitz",
-      "nameRu": "Морис «Мо» Далиц",
-      "tagline": "Russian-Jewish bootlegger who built Las Vegas and transformed from mobster to civic benefactor",
-      "profession": "Las Vegas Founder",
-      "category": "Business Moguls",
-      "categoryIcon": "briefcase",
-      "country": "USA",
-      "countryFlag": "🇺🇸",
-      "regionTag": "North America",
-      "ancestralLevel": "Parents",
-      "origin": "Russia (Jewish)",
-      "historicalEntity": "Russian Empire",
-      "russianProficiency": "No",
-      "tags": [
-        "Russian diaspora",
-        "Russian Empire roots"
-      ],
-      "source1": "https://en.wikipedia.org/wiki/Moe_Dalitz"
     },
     {
       "id": 649,
